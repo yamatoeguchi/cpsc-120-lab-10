@@ -23,10 +23,13 @@ using namespace std;
 /// \param r A ray eminating from the camera through the scene
 /// \returns The color visible from that ray
 Color RayColor(const Ray& r) {
+  Vec3 unit_direction = UnitVector(r.direction());
+  double t = 0.5 * (unit_direction.y() + 1.0);
   Color c;
-  Color sky_top;
-  Color sky_bottom;
+  Vec3 sky_top{0.5, 0.75, 0.92};
+  Vec3 sky_bottom{1.0, 1.0, 1.0};;
   // TODO: Complete this function
+  c = ((1.0 - t) * sky_bottom) + (t * sky_top);
   return c;
 }
 
@@ -144,14 +147,18 @@ int main(int argc, char const* argv[]) {
       // The same is true for v
       // TODO: Calculate u
       double u = 0.0;
+      u = double(column) /  (double(image.width()) - 1);
       // TODO: Calculate v
       double v = 0.0;
+      v = double(row) / (double(image.height()) - 1);
       // Create a ray that starts at the camera's center, the origin, and
       // travels through the pixel center defined by
       // kLowerLeftCorner + u * kHorizontal + v * kVertical - kOrigin
+      Vec3 point_in_image_plane = kLowerLeftCorner + (u * kHorizontal) 
+                                  + (v * kVertical);
       // TODO: Create a ray that starts at the origin and passes through
       // current pixel center.
-      Ray r{kOrigin, kOrigin};
+      Ray r{kOrigin, point_in_image_plane};
       // Calculate and return the color at the pixel that Ray r
       // points through.
       Color pixel_color = RayColor(r);
