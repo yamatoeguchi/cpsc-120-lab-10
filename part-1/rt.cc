@@ -1,3 +1,13 @@
+// Yamato Eguchi
+// CPSC-120-01
+// 2021-04-25
+// yamatoe1227@csu.fullerton.edu
+// @yamatoeguchi
+//
+// Lab 10-01
+//
+// "This is my rt.cc assignment"
+//
 
 #include <chrono>
 #include <cmath>
